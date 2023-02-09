@@ -19,22 +19,20 @@ const numbers = [
   "King",
 ];
 
-export default function Card() {
-  //random number to split the deck
+const playingCards = [];
 
-  const [deck, setDeck] = useState([]);
-  const [leftHand, setLeftHand] = useState();
-  const playingCards = [];
-
-  //create a deck of cards
-  for (let i = 0; i < suits.length; i++) {
-    for (let j = 0; j < numbers.length; j++) {
-      let card = { number: numbers[j], suit: suits[i] };
-      playingCards.push(card);
-    }
+//create a deck of cards
+for (let i = 0; i < suits.length; i++) {
+  for (let j = 0; j < numbers.length; j++) {
+    let card = { number: numbers[j], suit: suits[i] };
+    playingCards.push(card);
   }
-  //console.log(playingCards);
+}
 
+export default function Card() {
+  const [leftHand, setLeftHand] = useState([]);
+
+  //random number to split the deck
   const getRandomInt = () => {
     let min = 2;
     let max = 6;
@@ -49,7 +47,6 @@ export default function Card() {
       randomInt = getRandomInt();
       let splice = rightHand.splice(i, i + randomInt);
       setLeftHand(splice.concat(leftHand));
-      // console.log(splice.concat(leftHand));
     } else {
       return null;
     }
@@ -65,7 +62,7 @@ export default function Card() {
           backgroundColor: "green",
         }}
       >
-        {playingCards.map((card, index) => (
+        {leftHand.map((card, index) => (
           <MediaCard data={card} key={index} />
         ))}
       </Box>
