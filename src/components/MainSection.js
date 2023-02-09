@@ -11,37 +11,37 @@ export default function Card() {
   //random number to split the deck
 
   const [deck, setDeck] = useState([]);
+  const [leftHand, setLeftHand] = useState([]);
+
+  useEffect(() => {
+    setDeck(cards);
+  }, []);
 
   const getRandomInt = () => {
     let min = 2;
     let max = 6;
     return Math.floor(Math.random() * (max - min) + min);
   };
-  useEffect(() => {
-    setDeck(cards);
-  }, []);
 
-  const shuffle = () => {
+  const singleOverhandPass = () => {
     let randomInt;
     let i = 0;
-    let newHand = [];
-    let currentHand = deck;
-    while (i < deck.length) {
+    let rightHand = deck;
+    if (rightHand.length > 0) {
       randomInt = getRandomInt();
-      let slice = currentHand.slice(i, i + randomInt);
-      newHand = slice.concat(newHand);
-      debugger;
-      i += randomInt;
-      setDeck(newHand);
+      let splice = rightHand.splice(i, i + randomInt);
+      setLeftHand(splice.concat(leftHand));
+    } else {
+      return null;
     }
   };
 
   return (
     <Box>
-      <Box>{deck}</Box>
+      <Box>{leftHand}</Box>
       <Box>
-        <Button variant="contained" onClick={shuffle}>
-          Shuffle
+        <Button variant="contained" onClick={singleOverhandPass}>
+          Overhand Shuffle
         </Button>
       </Box>
     </Box>
