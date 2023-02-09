@@ -19,7 +19,10 @@ export default function MediaCard(props) {
   };
 
   return (
-    <Card sx={{ height: "150px", width: "100px" }}>
+    <Card
+      variant="outlined"
+      sx={{ height: "150px", width: "100px", margin: "0.4em" }}
+    >
       <CardContent sx={{ padding: "0px" }}>
         <Box>
           <CardMedia

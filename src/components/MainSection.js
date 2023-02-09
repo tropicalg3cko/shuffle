@@ -62,13 +62,16 @@ export default function Card() {
           display: "flex",
           flexFlow: "row wrap",
           justifyContent: "left",
+          backgroundColor: "green",
         }}
       >
         {playingCards.map((card, index) => (
           <MediaCard data={card} key={index} />
         ))}
       </Box>
-      <Box>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", paddingTop: "20px" }}
+      >
         <Button variant="contained" onClick={singleOverhandPass}>
           Overhand Shuffle
         </Button>
