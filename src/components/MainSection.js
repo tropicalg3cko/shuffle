@@ -32,7 +32,7 @@ for (let i = 0; i < suits.length; i++) {
 export default function Card() {
   const [leftHand, setLeftHand] = useState([]);
 
-  //random number to split the deck
+  //random number to split the deck to simulate human randomness
   const getRandomInt = () => {
     let min = 2;
     let max = 6;
