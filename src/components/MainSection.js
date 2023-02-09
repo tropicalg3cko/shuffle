@@ -1,21 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
+import MediaCard from "./MediaCard";
 
-const cards = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
-  42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
+const suits = ["Club", "Diamond", "Spade", "Heart"];
+const numbers = [
+  "Ace",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "Jack",
+  "Queen",
+  "King",
 ];
 
 export default function Card() {
   //random number to split the deck
 
   const [deck, setDeck] = useState([]);
-  const [leftHand, setLeftHand] = useState([]);
+  const [leftHand, setLeftHand] = useState();
+  const playingCards = [];
 
-  useEffect(() => {
-    setDeck(cards);
-  }, []);
+  //create a deck of cards
+  for (let i = 0; i < suits.length; i++) {
+    for (let j = 0; j < numbers.length; j++) {
+      let card = { number: numbers[j], suit: suits[i] };
+      playingCards.push(card);
+    }
+  }
+  //console.log(playingCards);
 
   const getRandomInt = () => {
     let min = 2;
@@ -26,11 +44,12 @@ export default function Card() {
   const singleOverhandPass = () => {
     let randomInt;
     let i = 0;
-    let rightHand = deck;
+    let rightHand = playingCards;
     if (rightHand.length > 0) {
       randomInt = getRandomInt();
       let splice = rightHand.splice(i, i + randomInt);
       setLeftHand(splice.concat(leftHand));
+      // console.log(splice.concat(leftHand));
     } else {
       return null;
     }
@@ -38,7 +57,17 @@ export default function Card() {
 
   return (
     <Box>
-      <Box>{leftHand}</Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexFlow: "row wrap",
+          justifyContent: "left",
+        }}
+      >
+        {playingCards.map((card, index) => (
+          <MediaCard data={card} key={index} />
+        ))}
+      </Box>
       <Box>
         <Button variant="contained" onClick={singleOverhandPass}>
           Overhand Shuffle
