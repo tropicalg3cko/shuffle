@@ -1,23 +1,8 @@
 import { Card, CardContent, CardMedia } from "@mui/material";
 import { Typography, Box } from "@mui/material";
+import { getImage } from "../utils/MediaCard";
 
 export default function MediaCard(props) {
-  const getImage = () => {
-    let suit = props.data.suit;
-    switch (suit) {
-      case "Club":
-        return "/img/club.png";
-      case "Diamond":
-        return "/img/diamond.png";
-      case "Heart":
-        return "/img/heart.png";
-      case "Spade":
-        return "/img/spade.png";
-      default:
-        return false;
-    }
-  };
-
   return (
     <Card
       variant="outlined"
@@ -31,7 +16,8 @@ export default function MediaCard(props) {
               height: `35px`,
               width: `30px`,
             }}
-            src={getImage()}
+            src={getImage(props.data.suit)}
+            alt={props.data.suit}
           />
         </Box>
         <Box
