@@ -1,43 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
 import MediaCard from "./MediaCard";
+import { getRandomInt, createDeck } from "../utils/Card";
 
-const suits = ["Club", "Diamond", "Spade", "Heart"];
-const numbers = [
-  "Ace",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "Jack",
-  "Queen",
-  "King",
-];
-
-const playingCards = [];
-
-//create a deck of cards
-for (let i = 0; i < suits.length; i++) {
-  for (let j = 0; j < numbers.length; j++) {
-    let card = { number: numbers[j], suit: suits[i] };
-    playingCards.push(card);
-  }
-}
+const playingCards = createDeck();
 
 export default function Card() {
   const [leftHand, setLeftHand] = useState([]);
-
-  //random number to split the deck to simulate human randomness
-  const getRandomInt = () => {
-    let min = 2;
-    let max = 6;
-    return Math.floor(Math.random() * (max - min) + min);
-  };
 
   const singleOverhandPass = () => {
     let randomInt;
@@ -60,6 +29,7 @@ export default function Card() {
           flexFlow: "row wrap",
           justifyContent: "left",
           backgroundColor: "green",
+          height: "100%",
         }}
       >
         {leftHand.map((card, index) => (
