@@ -1,13 +1,18 @@
+import club from "../img/club.png";
+import spade from "../img/spade.png";
+import diamond from "../img/diamond.png";
+import heart from "../img/heart.png";
+
 export function getImage(suit) {
   switch (suit) {
     case "Club":
-      return "/img/club.png";
+      return club;
     case "Diamond":
-      return "/img/diamond.png";
+      return diamond;
     case "Heart":
-      return "/img/heart.png";
+      return heart;
     case "Spade":
-      return "/img/spade.png";
+      return spade;
     default:
       return false;
   }
